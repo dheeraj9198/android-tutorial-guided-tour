@@ -16,6 +16,10 @@ public class ViewTarget implements Target {
         mView = activity.findViewById(viewId);
     }
 
+    public ViewTarget(View view, Activity activity) {
+        mView = view;
+    }
+
     @Override
     public Point getPoint() {
         int[] location = new int[2];

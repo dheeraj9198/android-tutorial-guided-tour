@@ -58,10 +58,18 @@ public class SampleActivity extends Activity implements View.OnClickListener,
 //        lps.setMargins(margin, margin, margin, margin);
 //        co.buttonLayoutParams = lps;
 
+/*
         ViewTarget target = new ViewTarget(R.id.buttonBlocked, this);
+*/
+        ViewTarget target = new ViewTarget(buttonBlocked, this);
         sv = ShowcaseView.insertShowcaseView(target, this, R.string.showcase_main_title, R.string.showcase_main_message, co);
         sv.setOnShowcaseEventListener(this);
-
+        sv.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                sv.animateGesture(100, 100, 0, 0,true);
+            }
+        },1000);
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -73,11 +81,10 @@ public class SampleActivity extends Activity implements View.OnClickListener,
 
     @Override
     public void onClick(View view) {
-
         int viewId = view.getId();
         switch (viewId) {
             case R.id.buttonBlocked:
-                sv.animateGesture(100, 100, 0, 0);
+                sv.animateGesture(100, 100, 0, 0,true);
                 break;
         }
     }

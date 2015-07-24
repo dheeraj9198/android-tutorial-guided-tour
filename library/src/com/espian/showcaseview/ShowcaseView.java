@@ -422,11 +422,11 @@ public class ShowcaseView extends RelativeLayout
      * @param offsetStartY  y-offset of the start position
      * @param offsetEndX    x-offset of the end position
      * @param offsetEndY    y-offset of the end position
-     * @see com.espian.showcaseview.ShowcaseView#animateGesture(float, float, float, float, boolean)
+     * @see com.espian.showcaseview.ShowcaseView#animateGesture(float, float, float, float, boolean,boolean)
      */
     public void animateGesture(float offsetStartX, float offsetStartY, float offsetEndX,
-            float offsetEndY) {
-        animateGesture(offsetStartX, offsetStartY, offsetEndX, offsetEndY, false);
+            float offsetEndY,boolean visibleOnEnd) {
+        animateGesture(offsetStartX, offsetStartY, offsetEndX, offsetEndY, false,visibleOnEnd);
     }
 
     /**
@@ -438,25 +438,26 @@ public class ShowcaseView extends RelativeLayout
      * @param absoluteCoordinates   If true, this will use absolute coordinates instead of coordinates relative to the center of the showcased view
      */
     public void animateGesture(float startX, float startY, float endX,
-            float endY, boolean absoluteCoordinates) {
+            float endY, boolean absoluteCoordinates,boolean visibleOnEnd) {
         mHandy = ((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE))
                 .inflate(R.layout.handy, null);
         addView(mHandy);
         moveHand(startX, startY, endX, endY, absoluteCoordinates, new AnimationEndListener() {
             @Override
             public void onAnimationEnd() {
-                removeView(mHandy);
+                /*removeView(mHandy);*/
+                mHandy.setVisibility(VISIBLE);
             }
-        });
+        },visibleOnEnd);
     }
 
     private void moveHand(float startX, float startY, float endX,
-            float endY, boolean absoluteCoordinates, AnimationEndListener listener) {
+            float endY, boolean absoluteCoordinates, AnimationEndListener listener,boolean visibleOnEnd) {
         AnimationUtils.createMovementAnimation(mHandy, absoluteCoordinates?0:showcaseX,
                 absoluteCoordinates?0:showcaseY,
                 startX, startY,
                 endX, endY,
-                listener).start();
+                listener, visibleOnEnd).start();
     }
 
     @Override
