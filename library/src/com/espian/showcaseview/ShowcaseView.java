@@ -448,7 +448,7 @@ public class ShowcaseView extends RelativeLayout
                 /*removeView(mHandy);*/
                 mHandy.setVisibility(VISIBLE);
             }
-        },visibleOnEnd);
+        }, visibleOnEnd);
     }
 
     private void moveHand(float startX, float startY, float endX,
@@ -517,6 +517,11 @@ public class ShowcaseView extends RelativeLayout
                     }
                 }).start();
     }
+
+    public void setButtonPosition(LayoutParams layoutParams) {
+        this.mEndButton.setLayoutParams(layoutParams);
+    }
+
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
