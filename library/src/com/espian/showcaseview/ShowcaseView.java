@@ -440,7 +440,7 @@ public class ShowcaseView extends RelativeLayout
     public void animateGesture(float startX, float startY, float endX,
             float endY, boolean absoluteCoordinates,boolean visibleOnEnd) {
         mHandy = ((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE))
-                .inflate(R.layout.handy, null);
+                .inflate(R.layout.handy_left, null);
         addView(mHandy);
         moveHand(startX, startY, endX, endY, absoluteCoordinates, new AnimationEndListener() {
             @Override

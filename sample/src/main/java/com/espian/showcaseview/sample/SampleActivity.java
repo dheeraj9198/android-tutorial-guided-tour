@@ -84,7 +84,7 @@ public class SampleActivity extends Activity implements View.OnClickListener,
         int viewId = view.getId();
         switch (viewId) {
             case R.id.buttonBlocked:
-                sv.animateGesture(100, 100, 0, 0,true);
+                sv.animateGesture(-100, 100, 0, 0,true);
                 break;
         }
     }

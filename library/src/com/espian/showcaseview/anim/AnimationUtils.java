@@ -1,8 +1,11 @@
 package com.espian.showcaseview.anim;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.view.View;
 
+import com.github.espiandev.showcaseview.R;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorSet;
 import com.nineoldandroids.animation.ObjectAnimator;
@@ -96,15 +99,19 @@ public class AnimationUtils {
     public static AnimatorSet createMovementAnimation(View view, float canvasX, float canvasY,
                                                       float offsetStartX, float offsetStartY,
                                                       float offsetEndX, float offsetEndY,
-                                                      final AnimationEndListener listener,boolean visibleOnEnd) {
+                                                      final AnimationEndListener listener, boolean visibleOnEnd) {
         ViewHelper.setAlpha(view, INVISIBLE);
+
+        Bitmap bitmap = BitmapFactory.decodeResource(view.getContext().getResources(), R.drawable.hand_left);
+
+        int j = bitmap.getWidth();
 
         ObjectAnimator alphaIn = ObjectAnimator.ofFloat(view, ALPHA, INVISIBLE, VISIBLE).setDuration(500);
 
-        ObjectAnimator setUpX = ObjectAnimator.ofFloat(view, COORD_X, canvasX + offsetStartX).setDuration(INSTANT);
+        ObjectAnimator setUpX = ObjectAnimator.ofFloat(view, COORD_X, canvasX - j + offsetStartX).setDuration(INSTANT);
         ObjectAnimator setUpY = ObjectAnimator.ofFloat(view, COORD_Y, canvasY + offsetStartY).setDuration(INSTANT);
 
-        ObjectAnimator moveX = ObjectAnimator.ofFloat(view, COORD_X, canvasX + offsetEndX).setDuration(1000);
+        ObjectAnimator moveX = ObjectAnimator.ofFloat(view, COORD_X, canvasX - j + offsetEndX).setDuration(1000);
         ObjectAnimator moveY = ObjectAnimator.ofFloat(view, COORD_Y, canvasY + offsetEndY).setDuration(1000);
         moveX.setStartDelay(1000);
         moveY.setStartDelay(1000);
